@@ -1,5 +1,2 @@
-$ (flaskapp) $ pip3 freeze > requirements.txt
-
-
 Flask==1.1.2
 gunicorn==20.0.4
