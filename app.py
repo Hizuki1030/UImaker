@@ -7,7 +7,7 @@ def startMenu():
     name = "Hoge"
     return render_template('index.html', title='flask test', name=name) #変更
 
-@app.route('/hello')
+@app.route('/helloworld')
 def index():
     name = "Hoge"
     return "hello world"
