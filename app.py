@@ -15,13 +15,7 @@ def dated_url_for(endpoint, **values):
             values['q'] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)
 
-
 @app.route('/')
-def startMenu():
-    name = "Hoge"
-    return render_template('menu.html', title='flask test', name=name) #変更
-
-@app.route('/app/')
 def App():
     name = "Hoge"
     #return name
