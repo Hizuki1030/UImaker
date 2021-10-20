@@ -1,0 +1,71 @@
+html {
+    height: 100%;
+    width: 100%;
+  }
+
+body {
+margin:0;
+padding:0;
+}
+.title{
+  width: 100%;
+  height: 50px;
+  background-color:  #3EA8FF;
+  text-align: 10px;
+}
+
+#logo{
+  color:#ffffff;
+  font-size: 30px;
+  text-align: center;
+}
+.app{
+  display:flex;
+}
+#test_canvas{
+    border: solid 1% #000;
+}
+
+.contorol_panel{
+  display:flex;
+  flex-flow: column;
+  width: 10%;
+  height: 100%;
+  border: solid 2% #000;
+  margin: 1%;
+}
+
+.contorol_panel button{
+
+  margin: 5%;
+  width: 100%;
+  height: 100px;
+}
+
+.parameter_setting_wrapper{
+  display:flex;
+  flex-flow: column;
+  width: 14%;
+  height: 100%;
+  padding: 0.5em 1em;
+  margin-top: 2%;
+  font-weight: bold;
+  color: #6091d3;/*文字色*/
+  background: #FFF;
+  border: solid 3px #6091d3;/*線*/
+  border-radius: 10px;/*角の丸み*/
+
+  background-color: #EDF2F7;
+}
+
+.parameter_setting{
+
+  width: 100%;
+  margin: 0; 
+  padding: 0;
+  
+}
+
+.parameter_setting_color_input{
+  width: 50%;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <title>fabric.js test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/index.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.2.0/fabric.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/index.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/Module.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/Object.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/file.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/background.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/editObject.js')}}"></script>
+
+</head>
+
+<body>
+  <div class="title">
+    <font id="logo">UImaker</font>
+  </div>
+  <div class= "app">
+    
+    <div class = "contorol_panel">
+      <button onclick="addRect();"> add rect</button>
+      <button onclick="addCircle();"> add Circle</button>
+      <button onclick="addLine();"> add Line</button>
+      <button onclick="exportJson();"> export</button>
+      <button onclick="check();"> check</button>
+      <button onclick="getObjPosition();"> getObjs</button>
+      <button onclick="deleteObj();">deleteObj</button>    
+    </div>
+    <div id="canvas_wrapper">
+      <canvas id="test_canvas" ></canvas>
+    </div>
+    <div class = "parameter_setting_wrapper">
+      <div class ="parameter_setting">
+        <font size=3px>Type:</font><font class="ActiveObject" size=3px>Rect</font><br>
+        <font size=3px>&nbsp;&nbsp;&nbsp;x&nbsp;&nbsp;&nbsp;:</font>
+        <input class="parameter_setting_color_input" type="number"></input><br>
+        <font size=3px>&nbsp;&nbsp;&nbsp;y&nbsp;&nbsp;&nbsp;:</font>
+        <input class="parameter_setting_color_input" type="number"></input><br>
+        <font size=3px>width:</font>
+        <input class="parameter_setting_color_input" type="number"></input><br>
+        <font size=3px>hight:</font>
+        <input class="parameter_setting_color_input" type="number"></input><br>
+        <font size=3px>color:</font>
+        <input class="parameter_setting_color_input" type="color"></input><br>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+</body>
+</html>
