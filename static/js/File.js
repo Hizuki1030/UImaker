@@ -1,24 +1,15 @@
-
 function exportCode(){
     let components = getAllComponents();
     let code = generateCode(components);
     donloadFile("code",code);
 }
 
-
-
 function exportComportnents(){
-    
     let components = getAllComponents();
-    console.log(components)
-    let json_text = JSON.stringify(components)
-    donloadFile("ComponentsFile",json_text)
+    console.log(components);
+    let json_text = JSON.stringify(components);
+    donloadFile("ComponentsFile",json_text);
 }
-
-function importComponents(){
-    
-}
-
 
 function getObjPosition(e) {
     //選択されたオブジェクトの取得
@@ -26,11 +17,11 @@ function getObjPosition(e) {
     console.log(activeObjects)
     for(let i =1; i<activeObjects.length; i++){
         let object = activeObjects[i];
-        ObjectEdgePointY.push(object.top)
-        ObjectEdgePointY.push(object.top + object.height/2)
+        ObjectEdgePointY.push(object.top);
+        ObjectEdgePointY.push(object.top + object.height/2);
 
-        ObjectEdgePointX.push(object.right)
-        ObjectEdgePointX.push(object.right + object.width/2)
+        ObjectEdgePointX.push(object.right);
+        ObjectEdgePointX.push(object.right + object.width/2);
     }
 }
 
@@ -40,7 +31,7 @@ function getBackgroundColor(frame){
     array.forEach((value, index) => {
         let type = value.type;
         if(type == "background"){
-            color = value.fill
+            color = value.fill;
         }
       });
     return color
