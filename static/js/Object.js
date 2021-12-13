@@ -9,11 +9,10 @@ function addRect(){
     fill:"#0000ff",
     type:"components_rect",
     zIndex:0
-
     });
 
-    console.log(rect.zIndex)
-    canvas.add(rect)  
+    console.log(rect.zIndex);
+    canvas.add(rect); 
 }
 
 function addCircle(){
@@ -26,7 +25,7 @@ function addCircle(){
          type:"components_circle",
          zIndex:0});
 
-    canvas.add(Circle) 
+    canvas.add(Circle);
 }
 
 function addLine(){
@@ -71,10 +70,9 @@ function addRect_coord(left,top,width,height,color,layer,scaleX,scaleY){
     scaleY:scaleY,
     type:"components_rect",
     zIndex:layer
-
     });
 
-    canvas.add(rect)  
+    canvas.add(rect)  ;
 }
 
 function addCircle_coord(left,top,radius,color,layer,scaleX,scaleY){
@@ -89,7 +87,7 @@ function addCircle_coord(left,top,radius,color,layer,scaleX,scaleY){
          zIndex:layer
         });
 
-    canvas.add(Circle) 
+    canvas.add(Circle);
 }
 
 

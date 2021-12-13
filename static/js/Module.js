@@ -21,7 +21,7 @@ var ModuleDisplay = new fabric.Rect({
     left: frameLeft,
     top: frameTop,
     type:"background",
-  })
+  });
 
 const ModuleFalme = new fabric.Rect({
     width: DisplayWidth+frameLeft+frameRight,
@@ -31,7 +31,7 @@ const ModuleFalme = new fabric.Rect({
     top: 0,
     rx: 15,
     ry: 15
-  })
+  });
 
 const ModuleButton1 = new fabric.Rect({
     width: ButtonWidth,
@@ -41,7 +41,7 @@ const ModuleButton1 = new fabric.Rect({
     top: ButtontoDisplay+DisplayHeight+frameTop,
     rx: 3,
     ry: 3
-  })
+  });
 
 const ModuleButton2 = new fabric.Rect({
     width: ButtonWidth,
@@ -51,7 +51,7 @@ const ModuleButton2 = new fabric.Rect({
     top: ButtontoDisplay+DisplayHeight+frameTop,
     rx: 3,
     ry: 3
-  })
+  });
 
 const ModuleButton3 = new fabric.Rect({
     width: ButtonWidth,
@@ -61,14 +61,14 @@ const ModuleButton3 = new fabric.Rect({
     top: ButtontoDisplay+DisplayHeight+frameTop,
     rx: 3,
     ry: 3
-  })
+  });
 
 
 var M5stack = new fabric.Group([ModuleFalme , ModuleDisplay, ModuleButton1, ModuleButton2,ModuleButton3],{
   left: canvasWidth/2 - (DisplayWidth + frameRight + frameLeft)/2,
   top: canvasHeight/2 - (DisplayHeight/2 + frameTop) ,
   type:"frame",
-})
+});
 M5stack.selectable = false;
 
 var DisplayInitCoords = [ canvasWidth/2 - (DisplayWidth + frameRight + frameLeft)/2 + frameLeft ,canvasHeight/2 - (DisplayHeight/2)];
