@@ -1,7 +1,7 @@
 //window.onloadを使い、htmlが読み込みされてからスクリプトを動作させる。
-var canvas
+var canvas;
 var canvasSize = 0.95;
-var board
+var board;
 
 var canvasHeight = window.innerHeight* canvasSize;
 var canvasWidth = window.innerWidth * 0.7;
@@ -15,7 +15,7 @@ window.onload = function(){
       input: 'file',
     })
     addComponents(file);
-    })()
+    })();
 
     board = M5stack
     canvas_init();
