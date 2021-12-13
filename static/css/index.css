@@ -4,26 +4,39 @@ html {
   }
 
 body {
+height: 100%;
 margin:0;
 padding:0;
 }
 .title{
   width: 100%;
-  height: 50px;
-  background-color:  #3EA8FF;
-  text-align: 10px;
+  height: 5%;
+  background-color: #3d95ff;
+  display: flex;
+}
+
+
+.box {
+  width: 100%;                /* 横幅を200pxに指定 */
+  height: 200px;               /* 横幅を200pxに指定 */
+  overflow-y: scroll;          /* 縦方向にスクロール可能にする */
+  align-items: flex-end;
 }
 
 #logo{
   color:#ffffff;
   font-size: 30px;
-  text-align: center;
+  margin:auto;
 }
 .app{
   display:flex;
+  height: 95%;
+  width: 100%;
 }
 #test_canvas{
-    border: solid 1% #000;
+  background-color: #EDEDED;
+
+font-family: 'VT323', monospace;
 }
 
 .contorol_panel{
@@ -31,41 +44,61 @@ padding:0;
   flex-flow: column;
   width: 10%;
   height: 100%;
-  border: solid 2% #000;
-  margin: 1%;
+  background-color: #ffffff;
+  max-width: 100px;
+
 }
 
 .contorol_panel button{
 
+  font-weight: bold;
+  color: #000000;/*文字色*/
+  border: solid 3px #272624;/*線*/
+  border-radius: 10px;/*角の丸み*/
   margin: 5%;
-  width: 100%;
-  height: 100px;
+
 }
 
-.parameter_setting_wrapper{
+.contorol_panel img{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#edit_parameter_window{
   display:flex;
   flex-flow: column;
-  width: 14%;
-  height: 100%;
-  padding: 0.5em 1em;
-  margin-top: 2%;
-  font-weight: bold;
-  color: #6091d3;/*文字色*/
-  background: #FFF;
-  border: solid 3px #6091d3;/*線*/
-  border-radius: 10px;/*角の丸み*/
+  width: 20%;
+  background-color: #ffffff;
+}
 
-  background-color: #EDF2F7;
+#parameter_setting_wrapper {
+  display:flex;
+  flex-flow: column;
+}
+
+#background_setting_wrapper {
+  display:flex;
+  flex-flow: column;
 }
 
 .parameter_setting{
-
-  width: 100%;
-  margin: 0; 
+  font-weight: bold;
+  width: 90%;
+  margin: 5%; 
   padding: 0;
   
 }
 
-.parameter_setting_color_input{
+.parameter_setting input{
+  height: 2.4em;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc inset;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   width: 50%;
+  max-width:100px;
 }

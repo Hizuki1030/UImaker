@@ -3,56 +3,65 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
-  <title>fabric.js test</title>
+  <title>UImaker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/index.css') }}">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.2.0/fabric.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.1.0/fabric.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/index.js')}}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/Module.js')}}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/Object.js')}}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/file.js')}}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/background.js')}}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/editObject.js')}}"></script>
-
+<script type="text/javascript" src="{{ url_for('static', filename='js/ObjParameterSettingWindow.js')}}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+</style>
 </head>
 
 <body>
   <div class="title">
-    <font id="logo">UImaker</font>
+    <a id="logo">UImaker</a>
   </div>
   <div class= "app">
     
     <div class = "contorol_panel">
-      <button onclick="addRect();"> add rect</button>
-      <button onclick="addCircle();"> add Circle</button>
-      <button onclick="addLine();"> add Line</button>
-      <button onclick="exportJson();"> export</button>
-      <button onclick="check();"> check</button>
-      <button onclick="getObjPosition();"> getObjs</button>
-      <button onclick="deleteObj();">deleteObj</button>    
+      <br>
+      <img src="../static/pic/MD-disc-3-5''.png" onclick="exportComportnents();" alt="Result">
+      <hr width="90%">
+      <img src="../static/pic/document.png" onclick="exportCode();" alt="Result">
+
+      <hr width = "90%">
+      <img src="../static/pic/shape-parallelogram-orthogonal.png" onclick="addRect();" alt="Result">
+      <img src="../static/pic/shape-circle.png" onclick="addCircle();" alt="Result">
+      <img src="../static/pic/font.png" onclick="addText();" alt="Result">
+
+      <hr width = "90%">
+      <img src="../static/pic/3D-cylinder.png" onclick="deleteObj();" alt="Result">
+      <!--<img src="../static/pic/blog.png" onclick="Group();" alt="Result">-->
+      <img src="../static/pic/documents.png" onclick="Copy();" alt="Result">
+      <img src="../static/pic/document-new.png" onclick="Paste();" alt="Result">
+
+
     </div>
     <div id="canvas_wrapper">
       <canvas id="test_canvas" ></canvas>
     </div>
-    <div class = "parameter_setting_wrapper">
-      <div class ="parameter_setting">
-        <font size=3px>Type:</font><font class="ActiveObject" size=3px>Rect</font><br>
-        <font size=3px>&nbsp;&nbsp;&nbsp;x&nbsp;&nbsp;&nbsp;:</font>
-        <input class="parameter_setting_color_input" type="number"></input><br>
-        <font size=3px>&nbsp;&nbsp;&nbsp;y&nbsp;&nbsp;&nbsp;:</font>
-        <input class="parameter_setting_color_input" type="number"></input><br>
-        <font size=3px>width:</font>
-        <input class="parameter_setting_color_input" type="number"></input><br>
-        <font size=3px>hight:</font>
-        <input class="parameter_setting_color_input" type="number"></input><br>
-        <font size=3px>color:</font>
-        <input class="parameter_setting_color_input" type="color"></input><br>
+    <div id = "edit_parameter_window">
+      <div id = "parameter_setting_wrapper">
       </div>
+      <hr width="90%">
+      <div id = "background_setting_wrapper">
+        <div class ="parameter_setting">
+          <font size=3px>Background</font><br>
+          <font size=3px>color:</font>
+          <input id="background_color_input" type="color" onchange="changeBackgroundColor()"></input><br>
+        </div>
+      </div>      
     </div>
 
-
-
-
+ 
   </div>
 
 </body>
