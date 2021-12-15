@@ -1,6 +1,6 @@
 //window.onloadを使い、htmlが読み込みされてからスクリプトを動作させる。
 var canvas;
-var canvasSize = 0.95;
+var canvasSize = 1;
 var board;
 
 var canvasHeight = window.innerHeight* canvasSize;
@@ -13,6 +13,8 @@ window.onload = function(){
     const { value: file } = await Swal.fire({
       title: 'プロジェクトファイルを選択してください。',
       input: 'file',
+      showCancelButton: true,
+      cancelButtonText : '新規プロジェクト'
     })
     addComponents(file);
     })();

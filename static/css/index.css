@@ -30,7 +30,7 @@ padding:0;
 }
 .app{
   display:flex;
-  height: 95%;
+  height: 100%;
   width: 100%;
 }
 #test_canvas{

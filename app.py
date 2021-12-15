@@ -5,13 +5,7 @@ app = Flask(__name__)
 @app.route('/')
 def startMenu():
     name = "Hoge"
-    return render_template('index.html', title='flask test', name=name) #変更
-
-@app.route('/helloworld')
-def index():
-    name = "Hoge"
-    return "hello world"
-
+    return render_template('index.html', title='UImaker', name=name) #変更
 
 ## おまじない
 if __name__ == "__main__":
