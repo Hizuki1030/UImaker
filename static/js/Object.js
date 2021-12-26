@@ -1,8 +1,8 @@
 function addRect(){
     console.log(DisplayInitCoords)
     let rect = new fabric.Rect({
-        left: canvasWidth/2 - (DisplayWidth + frameRight + frameLeft)/2,
-        top: canvasHeight/2 - (DisplayHeight/2 + frameTop) ,
+        left: 100,
+        top: 150,
     width: 40,        //幅
     height: 120,      //高さ
     strokeWidth:0,
@@ -19,8 +19,8 @@ function addCircle(){
     let Circle= new fabric.Circle({ 
         radius: 30,
          fill: '#ff0000', 
-         left: canvasWidth/2 - (DisplayWidth + frameRight + frameLeft)/2,
-         top: canvasHeight/2 - (DisplayHeight/2 + frameTop) ,
+         left: 100,
+         top: 150,
          strokeWidth:0,
          type:"components_circle",
          zIndex:0});
