@@ -70,4 +70,24 @@ function resizeCanvas() {
     canvas.renderAll();
   }
 
+window.addEventListener("keydown", handleKeydown);
 
+function handleKeydown(event){
+  // キーコード(どのキーが押されたか)を取得
+  var keyCode = event.keyCode;
+  let isCtrl = event.ctrlKey;
+  // 条件文で制御する\
+    console.log(keyCode,"is pressed");
+    if (keyCode == 67 && isCtrl){ //c
+      Copy();
+    }
+    if (keyCode == 86) { //v
+      Paste();
+    }
+    if (keyCode == 38) {
+      
+    }
+    if (keyCode == 40) {
+      // 下
+    } 
+}

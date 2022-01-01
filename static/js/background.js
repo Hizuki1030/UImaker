@@ -88,53 +88,70 @@ function fineTuningInit(){
 
     canvas.on('object:moving', function(options) {
         EdgePointX = ObjectEdgePointX.concat(ModuleEdgePointX);
-    EdgePointY = ObjectEdgePointY.concat(ModuleEdgePointY);
-    let objectMiddle = options.target.left + options.target.width * options.target.scaleX /2;
-    for(let i =0; i<EdgePointX.length; i++){
-        if (objectMiddle > EdgePointX[i] - snapZone && objectMiddle < EdgePointX[i] + snapZone) {
-        options.target.set({
-            left: EdgePointX[i] - options.target.width * options.target.scaleX/2,
-        }).setCoords();
-    }
-    }
+        EdgePointY = ObjectEdgePointY.concat(ModuleEdgePointY);
+        let objectMiddle = options.target.left + options.target.width * options.target.scaleX /2;
+        for(let i =0; i<EdgePointX.length; i++){
+            if (objectMiddle > EdgePointX[i] - snapZone && objectMiddle < EdgePointX[i] + snapZone) {
+                options.target.set({
+                    left: EdgePointX[i] - options.target.width * options.target.scaleX/2,
 
-    let objectCenterY = options.target.top + options.target.height* options.target.scaleY / 2;
-    for(let i =0; i<EdgePointY.length; i++){
-        if (objectCenterY > EdgePointY[i] - snapZone && objectCenterY < EdgePointY[i] + snapZone) {
-        options.target.set({
-            top: EdgePointY[i] - options.target.height * options.target.scaleY/2,
-        }).setCoords();
+                }).setCoords();
+                
+                console.log(EdgePointX[i],objectMiddle)
+
+        //baselineを引く処理~~~~~~~~~~~~
+        let marginZone = 1;
+        if (objectMiddle > EdgePointX[i] - marginZone && objectMiddle < EdgePointX[i] + marginZone){//座長取得すると小数で表示されるため微妙に合わない
+            canvas.remove(baseline);
+            let coord = [EdgePointX[i],board.top +  frameTop,EdgePointX[i],board.top +  frameTop + DisplayHeight];
+            addLine(coord);
+            console.log("fit to left");    
+        }else{
+            canvas.remove(baseline);
         }
-    }    
-
-    let objectTop = options.target.top;
-    for(let i =0; i<EdgePointY.length; i++){
-        if (objectTop > EdgePointY[i] - snapZone && objectTop < EdgePointY[i] + snapZone) {
-        options.target.set({
-            top: EdgePointY[i]  ,
-        }).setCoords();
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                
+                               
+            }
         }
-    }
+
+        let objectCenterY = options.target.top + options.target.height* options.target.scaleY / 2;
+        for(let i =0; i<EdgePointY.length; i++){
+            if (objectCenterY > EdgePointY[i] - snapZone && objectCenterY < EdgePointY[i] + snapZone) {
+                options.target.set({
+                    top: EdgePointY[i] - options.target.height * options.target.scaleY/2,
+                }).setCoords();
+            }
+        }    
+
+        let objectTop = options.target.top;
+        for(let i =0; i<EdgePointY.length; i++){
+            if (objectTop > EdgePointY[i] - snapZone && objectTop < EdgePointY[i] + snapZone) {
+                options.target.set({
+                    top: EdgePointY[i]  ,
+                }).setCoords();
+            }
+        }
 
 
-    let objectLeft = options.target.left;
-    
-    for(let i =0; i<EdgePointX.length; i++){
-        if (objectLeft > EdgePointX[i] - snapZone && objectLeft < EdgePointX[i] + snapZone) {
-        options.target.set({
-            left: EdgePointX[i],
-        }).setCoords();
-    }
-    }
-    let objectRight = options.target.left + options.target.width *  options.target.scaleX;
-    
-    for(let i =0; i<EdgePointX.length; i++){
-        if (objectRight > EdgePointX[i] - snapZone && objectRight < EdgePointX[i] + snapZone) {
-        options.target.set({
-            left: EdgePointX[i] - options.target.width *  options.target.scaleX,
-        }).setCoords();
-    }
-    }
+        let objectLeft = options.target.left;
+        
+        for(let i =0; i<EdgePointX.length; i++){
+            if (objectLeft > EdgePointX[i] - snapZone && objectLeft < EdgePointX[i] + snapZone) {
+            options.target.set({
+                left: EdgePointX[i],
+            }).setCoords();
+        }
+        }
+        let objectRight = options.target.left + options.target.width *  options.target.scaleX;
+        
+        for(let i =0; i<EdgePointX.length; i++){
+            if (objectRight > EdgePointX[i] - snapZone && objectRight < EdgePointX[i] + snapZone) {
+            options.target.set({
+                left: EdgePointX[i] - options.target.width *  options.target.scaleX,
+            }).setCoords();
+        }
+        }
     
     }
     );
