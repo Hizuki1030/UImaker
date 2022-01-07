@@ -125,9 +125,9 @@ function fineTuningInit(){
                 canvas.remove(baseYline);
 
                 if (objectCenterY > EdgePointY[i] - marginZone && objectCenterY < EdgePointY[i] + marginZone){//座長取得すると小数で表示されるため微妙に合わない
-                    let coord = [board.left + frameLeft ,EdgePointY[i],10000,EdgePointY[i]];
+                    let coord = [board.left + frameLeft ,EdgePointY[i],board.left + frameLeft + DisplayWidth,EdgePointY[i]];
+                    console.log(coord)
                     addBaseYLine(coord);
-                    console.log("Ycetenr")
                 }                
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             }
