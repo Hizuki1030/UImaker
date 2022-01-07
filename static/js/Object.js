@@ -28,20 +28,37 @@ function addCircle(){
     canvas.add(Circle);
 }
 
-var baseline
-function addLine(coords){
+
+var baseXline
+function addBaseXLine(coords){
     
-    coords[0] = coords[0] -1 ;
-    coords[2] = coords[2] -1 ;
-    baseline = new fabric.Line(coords, {
+    coords[0] = coords[0] -0.5 ;
+    coords[2] = coords[2] -0.5;
+    baseXline = new fabric.Line(coords, {
         fill: 'red',
         stroke: 'red',
-        strokeWidth: 2,
+        strokeWidth: 1,
         type:"parts_line",
 
       });
-    baseline.selectable = false;
-    canvas.add(baseline);
+    baseXline.selectable = false;
+    canvas.add(baseXline);
+}
+
+var baseYline
+function addBaseYLine(coords){
+    
+    coords[0] = coords[0] -0.5 ;
+    coords[2] = coords[2] -0.5;
+    baseYline = new fabric.Line(coords, {
+        fill: 'red',
+        stroke: 'red',
+        strokeWidth: 1,
+        type:"parts_line",
+
+      });
+    baseYline.selectable = false;
+    canvas.add(baseYline);
 }
 
 var fontunitsize = 14;

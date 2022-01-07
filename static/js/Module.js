@@ -64,6 +64,7 @@ const ModuleButton3 = new fabric.Rect({
   });
 
 
+
 var M5stack = new fabric.Group([ModuleFalme , ModuleDisplay, ModuleButton1, ModuleButton2,ModuleButton3],{
   left: canvasWidth/2 - (DisplayWidth + frameRight + frameLeft)/2,
   top: canvasHeight/2 - (DisplayHeight/2 + frameTop) ,

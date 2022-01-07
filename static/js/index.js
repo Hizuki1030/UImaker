@@ -22,6 +22,7 @@ window.onload = function(){
     board = M5stack
     canvas_init();
     fineTuningInit()
+    board.moveTo(0);
     canvas.add(board);
     canvas.renderAll();
 
@@ -81,13 +82,7 @@ function handleKeydown(event){
     if (keyCode == 67 && isCtrl){ //c
       Copy();
     }
-    if (keyCode == 86) { //v
+    if (keyCode == 86  && isCtrl) { //v
       Paste();
     }
-    if (keyCode == 38) {
-      
-    }
-    if (keyCode == 40) {
-      // 下
-    } 
 }

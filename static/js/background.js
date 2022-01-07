@@ -17,9 +17,7 @@ function check(){
 
 function setWindowParameter(options){
     if(!(options.target === null)){
-        console.log(options.target)
         let type = options.target.type;
-        console.log(type)
         if(type === "components_rect"){
             setRectSettingWindow();
             document.getElementById('parameter_setting_x_input').value = parseInt(options.target.left) ;
@@ -89,6 +87,8 @@ function fineTuningInit(){
     canvas.on('object:moving', function(options) {
         EdgePointX = ObjectEdgePointX.concat(ModuleEdgePointX);
         EdgePointY = ObjectEdgePointY.concat(ModuleEdgePointY);
+
+        //真ん中X軸
         let objectMiddle = options.target.left + options.target.width * options.target.scaleX /2;
         for(let i =0; i<EdgePointX.length; i++){
             if (objectMiddle > EdgePointX[i] - snapZone && objectMiddle < EdgePointX[i] + snapZone) {
@@ -97,17 +97,14 @@ function fineTuningInit(){
 
                 }).setCoords();
                 
-                console.log(EdgePointX[i],objectMiddle)
 
         //baselineを引く処理~~~~~~~~~~~~
         let marginZone = 1;
+        canvas.remove(baseXline);
+
         if (objectMiddle > EdgePointX[i] - marginZone && objectMiddle < EdgePointX[i] + marginZone){//座長取得すると小数で表示されるため微妙に合わない
-            canvas.remove(baseline);
             let coord = [EdgePointX[i],board.top +  frameTop,EdgePointX[i],board.top +  frameTop + DisplayHeight];
-            addLine(coord);
-            console.log("fit to left");    
-        }else{
-            canvas.remove(baseline);
+            addBaseXLine(coord);
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 
@@ -115,12 +112,24 @@ function fineTuningInit(){
             }
         }
 
+        //真ん中Y軸
         let objectCenterY = options.target.top + options.target.height* options.target.scaleY / 2;
         for(let i =0; i<EdgePointY.length; i++){
             if (objectCenterY > EdgePointY[i] - snapZone && objectCenterY < EdgePointY[i] + snapZone) {
                 options.target.set({
                     top: EdgePointY[i] - options.target.height * options.target.scaleY/2,
                 }).setCoords();
+
+                //baselineを引く処理~~~~~~~~~~~~
+                let marginZone = 1;
+                canvas.remove(baseYline);
+
+                if (objectCenterY > EdgePointY[i] - marginZone && objectCenterY < EdgePointY[i] + marginZone){//座長取得すると小数で表示されるため微妙に合わない
+                    let coord = [board.left + frameLeft ,EdgePointY[i],10000,EdgePointY[i]];
+                    addBaseYLine(coord);
+                    console.log("Ycetenr")
+                }                
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             }
         }    
 
@@ -150,11 +159,19 @@ function fineTuningInit(){
             options.target.set({
                 left: EdgePointX[i] - options.target.width *  options.target.scaleX,
             }).setCoords();
-        }
+            }
         }
     
     }
     );
+
+
+    canvas.on('mouse:up', function(options) {
+        console.log("mosue up");
+        canvas.remove(baseXline);
+        canvas.remove(baseYline);
+
+    });
 }
 
 
