@@ -8,10 +8,9 @@ function addRect(){
     strokeWidth:0,
     fill:"#0000ff",
     type:"components_rect",
-    zIndex:0
+    zIndex:1
     });
 
-    console.log(rect.zIndex);
     canvas.add(rect); 
 }
 
@@ -23,7 +22,7 @@ function addCircle(){
          top: 150,
          strokeWidth:0,
          type:"components_circle",
-         zIndex:0});
+         zIndex:1});
 
     canvas.add(Circle);
 }
@@ -73,6 +72,7 @@ function addText(){
         fill:'#000000',
         fontFamily: 'VT323',
         type:"components_text",
+        zIndex:1
     });
     text.hasControls = false;
     text.text = "hello";
