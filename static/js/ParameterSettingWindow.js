@@ -1,3 +1,5 @@
+
+//長方形用設定windowの表示処理
 function setRectSettingWindow(){
     let html = '<div class ="parameter_setting">'
     +'<font size=3px>Type:</font><font class="ActiveObject" size=3px>Rect</font><br>'
@@ -16,52 +18,8 @@ function setRectSettingWindow(){
     +'</div>'
     document.getElementById("parameter_setting_wrapper").innerHTML = html
 }
-function parameterZindexChange(){
-    console.log("called")
-    let activeObjects = canvas.getActiveObjects();
-    let zIndex = document.getElementById('parameter_setting_Zindex_input').value;
-    for(let i=0; i < activeObjects.length ;i++){
-        let activeObject = activeObjects[i];
-        activeObject.set("zIndex",parseInt(zIndex))
-        activeObject.moveTo(parseInt(zIndex))
-        console.log(zIndex)   
-    }
 
-    canvas.renderAll();
-}
-
-function parameterColorChange(){
-    console.log("called")
-    let activeObjects = canvas.getActiveObjects();
-    let color = document.getElementById('parameter_setting_color_input').value;
-    for(let i=0; i < activeObjects.length ;i++){
-        let activeObject = activeObjects[i];
-        activeObject.set("fill",color)
-        console.log(color)   
-    }
-
-    canvas.requestRenderAll();
-}
-function parameterXChange(){
-    console.log("called")
-    let activeObjects = canvas.getActiveObject();
-    console.log(activeObjects)
-    let X = parseFloat(document.getElementById('parameter_setting_x_input').value);
-    console.log(X)
-    activeObjects.set("left",X)
-    canvas.requestRenderAll();
-}
-
-function parameterYChange(){
-    console.log("called")
-    let activeObjects = canvas.getActiveObject();
-    console.log(activeObjects)
-    let Y = parseFloat(document.getElementById('parameter_setting_y_input').value);
-    console.log(Y)
-    activeObjects.set("top",Y)
-    canvas.requestRenderAll();
-}
-
+//円形用設定windowの表示処理
 function setCircleSettingWindow(){
     let html = '<div class ="parameter_setting">'
     +'<font size=3px>Type:</font><font class="ActiveObject" size=3px>Circle</font><br>'
@@ -81,12 +39,7 @@ function setCircleSettingWindow(){
     document.getElementById("parameter_setting_wrapper").innerHTML = html
 }
 
-function changeBackgroundColor(){
-    console.log("chanegbackgroundcolor is changed")
-    ModuleDisplay.set("fill",document.getElementById('background_color_input').value);
-    canvas.requestRenderAll();
-}
-
+//テキスト用設定windowの表示処理
 function setTextSettingWindow(){
     let html = '<div class ="parameter_setting">'
     +'<font size=3px>Type:</font><font class="ActiveObject" size=3px>Text</font><br>'
@@ -106,6 +59,64 @@ function setTextSettingWindow(){
     document.getElementById("parameter_setting_wrapper").innerHTML = html
 }
 
+//オブジェクトのZ位置の変更処理
+function parameterZindexChange(){
+    console.log("called")
+    let activeObjects = canvas.getActiveObjects();
+    let zIndex = document.getElementById('parameter_setting_Zindex_input').value;
+    for(let i=0; i < activeObjects.length ;i++){
+        let activeObject = activeObjects[i];
+        activeObject.set("zIndex",parseInt(zIndex))
+        activeObject.moveTo(parseInt(zIndex))
+        console.log(zIndex)   
+    }
+
+    canvas.renderAll();
+}
+
+//オブジェクトの色の変更処理
+function parameterColorChange(){
+    console.log("called")
+    let activeObjects = canvas.getActiveObjects();
+    let color = document.getElementById('parameter_setting_color_input').value;
+    for(let i=0; i < activeObjects.length ;i++){
+        let activeObject = activeObjects[i];
+        activeObject.set("fill",color)
+        console.log(color)   
+    }
+
+    canvas.requestRenderAll();
+}
+
+//オブジェクトの描画X軸位置の変更処理
+function parameterXChange(){
+    let activeObjects = canvas.getActiveObject();
+    console.log(activeObjects)
+    let X = parseFloat(document.getElementById('parameter_setting_x_input').value);
+    console.log(X)
+    activeObjects.set("left",X)
+    canvas.requestRenderAll();
+}
+
+//オブジェクトの描画Y軸位置の変更
+function parameterYChange(){
+    let activeObjects = canvas.getActiveObject();
+    console.log(activeObjects)
+    let Y = parseFloat(document.getElementById('parameter_setting_y_input').value);
+    console.log(Y)
+    activeObjects.set("top",Y)
+    canvas.requestRenderAll();
+}
+
+//背景色の変更処理
+function changeBackgroundColor(){
+    console.log("chanegbackgroundcolor is changed")
+    ModuleDisplay.set("fill",document.getElementById('background_color_input').value);
+    canvas.requestRenderAll();
+}
+
+
+//文字サイズの変更処理
 function parameterFontsizeChange(){
     console.log("called")
     let activeObjects = canvas.getActiveObject();
@@ -114,6 +125,7 @@ function parameterFontsizeChange(){
     canvas.renderAll();
 }
 
+//文字列の変更処理
 function parameterTextChange(){
     console.log("called")
     let activeObjects = canvas.getActiveObject();

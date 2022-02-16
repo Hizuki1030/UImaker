@@ -1,13 +1,15 @@
-//window.onloadを使い、htmlが読み込みされてからスクリプトを動作させる。
+
 var canvas;
 var canvasSize = 1;
 var board;
 
 var canvasHeight = window.innerHeight* canvasSize;
 var canvasWidth = window.innerWidth * 0.7;
-//canvas init setting or resize setting~~~~~~~~~~~~~~
+
+
 
 window.onload = function(){ 
+  //プロジェクトファイルの投稿処理
   (async () => {
 
     const { value: file } = await Swal.fire({
@@ -25,14 +27,10 @@ window.onload = function(){
     board.moveTo(0);
     canvas.add(board);
     canvas.renderAll();
-
-    // used for grids
-
 }
 window.addEventListener( 'resize', resizeCanvas, false);
 
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function canvas_init(){
     canvas = new fabric.Canvas('test_canvas');

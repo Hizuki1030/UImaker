@@ -9,10 +9,6 @@ var ModuleEdgePointY =new Array()
 var EdgePointX =new Array();
 var EdgePointY =new Array();
 
-function check(){
-    console.log(board)
-    console.log(board.left)
-}
 
 
 function setWindowParameter(options){
