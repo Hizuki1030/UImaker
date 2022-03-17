@@ -26,7 +26,7 @@ function getObjPosition(e) {
 }
 
 function getBackgroundColor(frame){
-    let array = frame._objects
+    let array = frame._objects;
     let color;
     array.forEach((value, index) => {
         let type = value.type;
