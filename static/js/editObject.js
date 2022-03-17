@@ -19,8 +19,10 @@ function Group(){
     if (! canvas.getActiveObject()) { return; }
     if (canvas.getActiveObject().type !== 'activeSelection') { return; }
     
-    canvas.getActiveObject().toGroup();
+    let group = canvas.getActiveObject().toGroup();
+	group.type = "components_group";	
     canvas.requestRenderAll();
+
 }
 
 function Copy() {

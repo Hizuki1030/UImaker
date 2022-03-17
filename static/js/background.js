@@ -207,6 +207,82 @@ function getAllComponents(){
             let text = object.text;
             let fontSize = object.fontSize/fontunitsize;
             components.push({layer:layer,type:"text",fontSize:fontSize,color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,text:text});
+        }else if(type=="components_group"){
+            let ChildObjs = object._objects;
+            let ChildObjs_text = JSON.stringify(ChildObjs);
+            components.push({layer:layer,type:"group",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,child:ChildObjs_text});
+        }
+      });
+    return components
+}
+
+function ConvertDataFormat(objects){
+    let components = new Array;    
+
+    objects.forEach((object, index) => {
+        let type = object.type;
+        let color = object.fill;
+        let left = object.left-DisplayInitCoords[0];
+        let top = object.top-DisplayInitCoords[1];
+        let width = object.width;
+        let scaleX = object.scaleX;
+        let height = object.height;
+        let scaleY = object.scaleY;
+        let radius = object.radius;
+        console.log(object)
+        let layer = object.zIndex;
+        console.log(layer)
+        if(type == "frame"){
+            let backgroundColor = getBackgroundColor(object)
+            components.push({type:"background",color:backgroundColor});
+        }else if(type=="components_rect"){
+            components.push({layer:layer,type:"rect",color:color,left:left,top:top,width:width,height:height,scaleX:scaleX,scaleY:scaleY});
+        }else if(type=="components_circle"){
+            console.log('left:%s\n top:%s',left,top);
+            components.push({layer:layer,type:"circle",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,radius:radius,scaleX:scaleX,scaleY:scaleY});
+        }else if(type=="components_text"){
+            let text = object.text;
+            let fontSize = object.fontSize/fontunitsize;
+            components.push({layer:layer,type:"text",fontSize:fontSize,color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,text:text});
+        }
+      });
+    return components
+}
+
+function ConvertDataFormat(){
+    let objects = canvas.getObjects();
+    console.log(objects)
+
+    console.log(objects)
+    let frameTop,frameLeft;
+        let Display_info ={};
+        let components = new Array;    
+
+    objects.forEach((object, index) => {
+        let type = object.type;
+        let color = object.fill;
+        let left = object.left-DisplayInitCoords[0];
+        let top = object.top-DisplayInitCoords[1];
+        let width = object.width;
+        let scaleX = object.scaleX;
+        let height = object.height;
+        let scaleY = object.scaleY;
+        let radius = object.radius;
+        console.log(object)
+        let layer = object.zIndex;
+        console.log(layer)
+        if(type == "frame"){
+            let backgroundColor = getBackgroundColor(object)
+            components.push({type:"background",color:backgroundColor});
+        }else if(type=="components_rect"){
+            components.push({layer:layer,type:"rect",color:color,left:left,top:top,width:width,height:height,scaleX:scaleX,scaleY:scaleY});
+        }else if(type=="components_circle"){
+            console.log('left:%s\n top:%s',left,top);
+            components.push({layer:layer,type:"circle",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,radius:radius,scaleX:scaleX,scaleY:scaleY});
+        }else if(type=="components_text"){
+            let text = object.text;
+            let fontSize = object.fontSize/fontunitsize;
+            components.push({layer:layer,type:"text",fontSize:fontSize,color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,text:text});
         }
 
       });
