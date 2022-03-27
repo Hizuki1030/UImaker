@@ -18,7 +18,7 @@ window.onload = function(){
       showCancelButton: true,
       cancelButtonText : '新規プロジェクト'
     })
-    addComponents(file);
+    addComponentsFromFile(file);
     })();
 
     board = M5stack

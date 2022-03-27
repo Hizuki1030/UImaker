@@ -4,6 +4,11 @@ function exportCode(){
     donloadFile("code",code);
 }
 
+function PrintAllComponents(){
+    let components = getAllComponents();
+    console.log(components)
+}
+
 function exportComportnents(){
     let components = getAllComponents();
     console.log(components);

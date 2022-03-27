@@ -14,7 +14,7 @@ var EdgePointY =new Array();
 function setWindowParameter(options){
     if(!(options.target === null)){
         let type = options.target.type;
-        if(type === "components_rect"){
+        if(type === "rect"){
             setRectSettingWindow();
             document.getElementById('parameter_setting_x_input').value = parseInt(options.target.left) ;
             document.getElementById('parameter_setting_y_input').value = parseInt(options.target.top);
@@ -23,7 +23,7 @@ function setWindowParameter(options){
             document.getElementById('parameter_setting_height_input').value = parseInt(options.target.height * options.target.scaleY);
             document.getElementById('parameter_setting_Zindex_input').value = options.target.zIndex;
             console.log(options.target.fill);
-        }else if(type === "components_circle"){
+        }else if(type === "circle"){
             setCircleSettingWindow();
             document.getElementById('parameter_setting_x_input').value = parseInt(options.target.left) ;
             document.getElementById('parameter_setting_y_input').value = parseInt(options.target.top);
@@ -31,7 +31,7 @@ function setWindowParameter(options){
             document.getElementById('parameter_setting_width_input').value = parseInt(options.target.width * options.target.scaleX);
             document.getElementById('parameter_setting_height_input').value = parseInt(options.target.height * options.target.scaleY);
             document.getElementById('parameter_setting_Zindex_input').value = options.target.zIndex;
-        }else if(type === "components_text"){
+        }else if(type === "text"){
             setTextSettingWindow();
             document.getElementById('parameter_setting_x_input').value = parseInt(options.target.left) ;
             document.getElementById('parameter_setting_y_input').value = parseInt(options.target.top);
@@ -198,19 +198,19 @@ function getAllComponents(){
         if(type == "frame"){
             let backgroundColor = getBackgroundColor(object)
             components.push({type:"background",color:backgroundColor});
-        }else if(type=="components_rect"){
+        }else if(type=="rect"){
             components.push({layer:layer,type:"rect",color:color,left:left,top:top,width:width,height:height,scaleX:scaleX,scaleY:scaleY});
-        }else if(type=="components_circle"){
+        }else if(type=="circle"){
             console.log('left:%s\n top:%s',left,top);
             components.push({layer:layer,type:"circle",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,radius:radius,scaleX:scaleX,scaleY:scaleY});
-        }else if(type=="components_text"){
+        }else if(type=="text"){
             let text = object.text;
             let fontSize = object.fontSize/fontunitsize;
             components.push({layer:layer,type:"text",fontSize:fontSize,color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,text:text});
-        }else if(type=="components_group"){
+        }else if(type=="group"){
             let ChildObjs = object._objects;
-            let ChildObjs_text = JSON.stringify(ChildObjs);
-            components.push({layer:layer,type:"group",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,child:ChildObjs_text});
+            let ChildObjs_text = String(JSON.stringify(ChildObjs));
+            components.push({layer:layer,type:"group",left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,child:ChildObjs});
         }
       });
     return components
@@ -235,12 +235,12 @@ function ConvertDataFormat(objects){
         if(type == "frame"){
             let backgroundColor = getBackgroundColor(object)
             components.push({type:"background",color:backgroundColor});
-        }else if(type=="components_rect"){
+        }else if(type=="rect"){
             components.push({layer:layer,type:"rect",color:color,left:left,top:top,width:width,height:height,scaleX:scaleX,scaleY:scaleY});
-        }else if(type=="components_circle"){
+        }else if(type=="circle"){
             console.log('left:%s\n top:%s',left,top);
             components.push({layer:layer,type:"circle",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,radius:radius,scaleX:scaleX,scaleY:scaleY});
-        }else if(type=="components_text"){
+        }else if(type=="text"){
             let text = object.text;
             let fontSize = object.fontSize/fontunitsize;
             components.push({layer:layer,type:"text",fontSize:fontSize,color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,text:text});
@@ -249,46 +249,6 @@ function ConvertDataFormat(objects){
     return components
 }
 
-function ConvertDataFormat(){
-    let objects = canvas.getObjects();
-    console.log(objects)
-
-    console.log(objects)
-    let frameTop,frameLeft;
-        let Display_info ={};
-        let components = new Array;    
-
-    objects.forEach((object, index) => {
-        let type = object.type;
-        let color = object.fill;
-        let left = object.left-DisplayInitCoords[0];
-        let top = object.top-DisplayInitCoords[1];
-        let width = object.width;
-        let scaleX = object.scaleX;
-        let height = object.height;
-        let scaleY = object.scaleY;
-        let radius = object.radius;
-        console.log(object)
-        let layer = object.zIndex;
-        console.log(layer)
-        if(type == "frame"){
-            let backgroundColor = getBackgroundColor(object)
-            components.push({type:"background",color:backgroundColor});
-        }else if(type=="components_rect"){
-            components.push({layer:layer,type:"rect",color:color,left:left,top:top,width:width,height:height,scaleX:scaleX,scaleY:scaleY});
-        }else if(type=="components_circle"){
-            console.log('left:%s\n top:%s',left,top);
-            components.push({layer:layer,type:"circle",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,radius:radius,scaleX:scaleX,scaleY:scaleY});
-        }else if(type=="components_text"){
-            let text = object.text;
-            let fontSize = object.fontSize/fontunitsize;
-            components.push({layer:layer,type:"text",fontSize:fontSize,color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,text:text});
-        }
-
-      });
-        console.log(components)
-    return components
-}
 
 function generateCode(components){
     let code ="";
@@ -372,7 +332,77 @@ function readFile(file){
     reader.readAsText(file);
 }
 
-function addComponents(file){
+function addGroup(GroupObject){
+    let LeftGroup = GroupObject.left + DisplayInitCoords[0] + GroupObject.width/2;
+    let TopGroup  = GroupObject.top + DisplayInitCoords[1]  + GroupObject.height/2;
+
+    let WidthGroup = GroupObject.width;
+    let HeightGroup = GroupObject.height;
+    let LayerGroup = GroupObject.layer; 
+    let ScaleXGroup = GroupObject.scaleX;
+    let ScaleYGroup = GroupObject.scaleY;
+    let components = GroupObject.child;
+
+    let objs = new Array();
+    
+    components.forEach((component, i) => {
+        let obj;
+        // 要素に対しての処理
+        console.log(component);
+        if(component.type == "rect"){
+            let left = component.left;
+            let top  = component.top;
+            let width = component.width;
+            let height = component.height;
+            let color = component.fill;
+            let layer = component.layer; 
+            let scaleX = component.scaleX;
+            let scaleY = component.scaleY;
+            obj = getRectObj(left,top,width,height,color,layer,scaleX,scaleY);
+        }
+        if(component.type == "circle"){
+            let left = component.left;
+            let top  = component.top; 
+            let width = component.width;
+            let height = component.height;
+            let color = component.fill;
+            let layer = component.layer;
+            let radius = component.radius;
+            let scaleX = component.scaleX;
+            let scaleY = component.scaleY;
+            obj = getCircleObj(left,top,radius,color,layer,scaleX,scaleY);
+        }
+        if(component.type == "text"){
+            let left = component.left;
+            let top  = component.top; 
+            let width = component.width;
+            let height = component.height;
+            let color = component.fill;
+            let layer = component.layer; 
+            let scaleX = component.scaleX;
+            let scaleY = component.scaleY;
+            let text = component.text;
+            let fontsize = component.fontSize*fontunitsize;
+            obj = getTextObj(left,top,width,height,color,layer,scaleX,scaleY,text,fontsize);
+        }
+        objs.push(obj)
+    });
+    
+    console.log(objs)
+    ObjGroup = new fabric.Group(objs);
+
+    ObjGroup.left = LeftGroup - ObjGroup.width/2;
+    ObjGroup.top  = TopGroup - ObjGroup.height/2;
+    ObjGroup.scaleX = ScaleXGroup;
+    ObjGroup.scaleY = ScaleYGroup;
+    
+    canvas.add(ObjGroup)
+
+    canvas.requestRenderAll();
+}
+
+
+function addComponentsFromFile(file){
     var reader = new FileReader();
     var result = 'empty';
 
@@ -384,6 +414,8 @@ function addComponents(file){
         components.forEach((component, i) => {
             // 要素に対しての処理
             console.log(component);
+            console.log(component.type == "group")
+
             if(component.type == "rect"){
                 let left = component.left + DisplayInitCoords[0];
                 let top  = component.top + DisplayInitCoords[1];
@@ -394,8 +426,7 @@ function addComponents(file){
                 let scaleX = component.scaleX;
                 let scaleY = component.scaleY;
                 addRect_coord(left,top,width,height,color,layer,scaleX,scaleY);
-            }
-            if(component.type == "circle"){
+            }else if(component.type == "circle"){
                 console.log("add")
                 let left = component.left + DisplayInitCoords[0];
                 let top  = component.top + DisplayInitCoords[1];
@@ -407,22 +438,24 @@ function addComponents(file){
                 let scaleX = component.scaleX;
                 let scaleY = component.scaleY;
                 addCircle_coord(left,top,radius,color,layer,scaleX,scaleY);
-            }
-            if(component.type == "text"){
+            }else if(component.type == "text"){
                 let left = component.left + DisplayInitCoords[0];
                 let top  = component.top + DisplayInitCoords[1];
                 let width = component.width;
                 let height = component.height;
                 let color = component.color;
-                console.log(color);
                 let layer = component.layer; 
                 let scaleX = component.scaleX;
                 let scaleY = component.scaleY;
                 let text = component.text;
                 let fontsize = component.fontSize*fontunitsize;
                 addText_coord(left,top,width,height,color,layer,scaleX,scaleY,text,fontsize);
+            }else if(component.type == "group"){
+                addGroup(component);   
             }
         });
     };
     reader.readAsText(file);
 }
+
+
