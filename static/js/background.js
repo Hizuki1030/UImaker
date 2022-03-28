@@ -22,7 +22,6 @@ function setWindowParameter(options){
             document.getElementById('parameter_setting_width_input').value = parseInt(options.target.width * options.target.scaleX);
             document.getElementById('parameter_setting_height_input').value = parseInt(options.target.height * options.target.scaleY);
             document.getElementById('parameter_setting_Zindex_input').value = options.target.zIndex;
-            console.log(options.target.fill);
         }else if(type === "circle"){
             setCircleSettingWindow();
             document.getElementById('parameter_setting_x_input').value = parseInt(options.target.left) ;
@@ -58,10 +57,8 @@ function fineTuningInit(){
 
     canvas.on("before:selection:cleared",function(options){
         let activeObjects = canvas.getObjects();
-        console.log(activeObjects)
         for(let i =1; i<activeObjects.length; i++){
             let object = activeObjects[i];
-            console.log(object)
             ObjectEdgePointY.push(object.top)
             ObjectEdgePointY.push(object.top + object.height)
 
@@ -122,7 +119,6 @@ function fineTuningInit(){
 
                 if (objectCenterY > EdgePointY[i] - marginZone && objectCenterY < EdgePointY[i] + marginZone){//座長取得すると小数で表示されるため微妙に合わない
                     let coord = [board.left + frameLeft ,EdgePointY[i],board.left + frameLeft + DisplayWidth,EdgePointY[i]];
-                    console.log(coord)
                     addBaseYLine(coord);
                 }                
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -163,7 +159,6 @@ function fineTuningInit(){
 
 
     canvas.on('mouse:up', function(options) {
-        console.log("mosue up");
         canvas.remove(baseXline);
         canvas.remove(baseYline);
 
@@ -175,9 +170,7 @@ function fineTuningInit(){
 
 function getAllComponents(){
     let objects = canvas.getObjects();
-    console.log(objects)
 
-    console.log(objects)
     let frameTop,frameLeft;
         let Display_info ={};
         let components = new Array;    
@@ -192,16 +185,13 @@ function getAllComponents(){
         let height = object.height;
         let scaleY = object.scaleY;
         let radius = object.radius;
-        console.log(object)
         let layer = object.zIndex;
-        console.log(layer)
         if(type == "frame"){
             let backgroundColor = getBackgroundColor(object)
             components.push({type:"background",color:backgroundColor});
         }else if(type=="rect"){
             components.push({layer:layer,type:"rect",color:color,left:left,top:top,width:width,height:height,scaleX:scaleX,scaleY:scaleY});
         }else if(type=="circle"){
-            console.log('left:%s\n top:%s',left,top);
             components.push({layer:layer,type:"circle",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,radius:radius,scaleX:scaleX,scaleY:scaleY});
         }else if(type=="text"){
             let text = object.text;
@@ -236,7 +226,6 @@ function getAllGroupComponents(objects){
         if(type=="rect"){
             components.push({layer:layer,type:"rect",color:color,left:left,top:top,width:width,height:height,scaleX:scaleX,scaleY:scaleY});
         }else if(type=="circle"){
-            console.log('left:%s\n top:%s',left,top);
             components.push({layer:layer,type:"circle",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,radius:radius,scaleX:scaleX,scaleY:scaleY});
         }else if(type=="text"){
             let text = object.text;
@@ -260,16 +249,13 @@ function ConvertDataFormat(objects){
         let height = object.height;
         let scaleY = object.scaleY;
         let radius = object.radius;
-        console.log(object)
         let layer = object.zIndex;
-        console.log(layer)
         if(type == "frame"){
             let backgroundColor = getBackgroundColor(object)
             components.push({type:"background",color:backgroundColor});
         }else if(type=="rect"){
             components.push({layer:layer,type:"rect",color:color,left:left,top:top,width:width,height:height,scaleX:scaleX,scaleY:scaleY});
         }else if(type=="circle"){
-            console.log('left:%s\n top:%s',left,top);
             components.push({layer:layer,type:"circle",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,radius:radius,scaleX:scaleX,scaleY:scaleY});
         }else if(type=="text"){
             let text = object.text;
@@ -357,11 +343,9 @@ function donloadFile(filename,text){
 function colorChange_hex6_to_hex4(hex){
 
     hex = hex.replace("#","")
-    console.log(hex)
     let red = parseInt(hex[1]+hex[2]);
     let green = parseInt(hex[3]+hex[4]);
     let blue = parseInt(hex[5]+hex[6]);
-    console.log(red,green,blue)
     let hex4= parseInt(((red>>3)<<11) | ((green>>2)<<5) | (blue>>3),16)
     return hex4
 }
@@ -377,7 +361,6 @@ function getComponentsInfoasJson(file){
     readFile(file);
     let text = readFile();
     let components = text//JSON.parse(text);
-    console.log(components)
     return components[1];
 }
 
@@ -409,7 +392,6 @@ function addGroup(GroupObject){
     components.forEach((component, i) => {
         let obj;
         // 要素に対しての処理
-        console.log(component);
         if(component.type == "rect"){
             let left = component.left;
             let top  = component.top;
@@ -449,7 +431,6 @@ function addGroup(GroupObject){
         objs.push(obj)
     });
     
-    console.log(objs)
     ObjGroup = new fabric.Group(objs);
 
     ObjGroup.left = LeftGroup - ObjGroup.width/2;
@@ -471,11 +452,8 @@ function addComponentsFromFile(file){
     {
         result = e.target.result;
         let components = JSON.parse(result);
-        console.log(components[0])
         components.forEach((component, i) => {
             // 要素に対しての処理
-            console.log(component);
-            console.log(component.type == "group")
 
             if(component.type == "rect"){
                 let left = component.left + DisplayInitCoords[0];
@@ -488,7 +466,6 @@ function addComponentsFromFile(file){
                 let scaleY = component.scaleY;
                 addRect_coord(left,top,width,height,color,layer,scaleX,scaleY);
             }else if(component.type == "circle"){
-                console.log("add")
                 let left = component.left + DisplayInitCoords[0];
                 let top  = component.top + DisplayInitCoords[1];
                 let width = component.width;
