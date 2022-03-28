@@ -92,7 +92,7 @@ function fineTuningInit(){
                 
 
         //baselineを引く処理~~~~~~~~~~~~
-        let marginZone = 1;
+        let marginZone = 0.1;
         canvas.remove(baseXline);
 
         if (objectMiddle > EdgePointX[i] - marginZone && objectMiddle < EdgePointX[i] + marginZone){//座長取得すると小数で表示されるため微妙に合わない
@@ -114,7 +114,7 @@ function fineTuningInit(){
                 }).setCoords();
 
                 //baselineを引く処理~~~~~~~~~~~~
-                let marginZone = 1;
+                let marginZone = .1;
                 canvas.remove(baseYline);
 
                 if (objectCenterY > EdgePointY[i] - marginZone && objectCenterY < EdgePointY[i] + marginZone){//座長取得すると小数で表示されるため微妙に合わない
@@ -177,7 +177,7 @@ function getAllComponents(){
 
     objects.forEach((object, index) => {
         let type = object.type;
-        let color = object.color;
+        let color = object.fill;
         let left = object.left-DisplayInitCoords[0];
         let top = object.top-DisplayInitCoords[1];
         let width = object.width;

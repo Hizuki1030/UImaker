@@ -6,6 +6,7 @@ function addRect(){
     width: 40,        //幅
     height: 120,      //高さ
     strokeWidth:0,
+    strokeHeight:0,
     fill:"#0000ff",
     type:"rect",
     zIndex:1
@@ -21,6 +22,7 @@ function addCircle(){
          left: 100,
          top: 150,
          strokeWidth:0,
+        strokeHeight:0,
          type:"circle",
          zIndex:1});
 
@@ -66,6 +68,7 @@ function addText(){
         left: 100,
         top: 150,
         strokeWidth: 0,
+        strokeHeight:0,
         fontSize: 14,
         scaleX:1.11,//VT323fontが8pxなのでscaleで調整(画像でみて適当な値)
         scaleY:0.875,// VT323fontが8pxなのでscaleで調整(7/8)
@@ -83,6 +86,8 @@ function addRect_coord(left,top,width,height,color,layer,scaleX,scaleY){
     console.log(DisplayInitCoords)
     let rect = new fabric.Rect({
     width:width,
+    strokeWidth:0,
+    strokeHeight:0,
     height:height,
     fill: color, 
     left: left,
@@ -107,7 +112,10 @@ function addCircle_coord(left,top,radius,color,layer,scaleX,scaleY){
          scaleX:scaleX,
          scaleY:scaleY,
          type:"circle",
+         strokeWidth:0,
+         strokeHeight:0,
          zIndex:layer
+
         });
 
     canvas.add(Circle);
@@ -127,6 +135,8 @@ function addText_coord(left,top,width,height,color,layer,scaleX,scaleY,text,font
         scaleY:scaleY,
         fontSize: fontSize,
         fontFamily: 'VT323',
+        strokeWidth:0,
+        strokeHeight:0,
         type:"text",
     });
     Text.hasControls = false;
@@ -149,6 +159,8 @@ function getRectObj(left,top,width,height,color,layer,scaleX,scaleY){
     scaleX:scaleX,
     scaleY:scaleY,
     type:"rect",
+    strokeWidth:0,
+    strokeHeight:0,
     zIndex:layer
     });
 
@@ -164,6 +176,8 @@ function getCircleObj(left,top,radius,color,layer,scaleX,scaleY){
          scaleX:scaleX,
          scaleY:scaleY,
          type:"circle",
+         strokeWidth:0,
+         strokeHeight:0,
          zIndex:layer
         });
 
@@ -182,6 +196,8 @@ function getTextObj(left,top,width,height,color,layer,scaleX,scaleY,text,fontSiz
         scaleY:scaleY,
         fontSize: fontSize,
         fontFamily: 'VT323',
+        strokeWidth:0,
+        strokeHeight:0,
         type:"text",
     });
     Text.hasControls = false;
