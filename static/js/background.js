@@ -184,7 +184,7 @@ function getAllComponents(){
 
     objects.forEach((object, index) => {
         let type = object.type;
-        let color = object.fill;
+        let color = object.color;
         let left = object.left-DisplayInitCoords[0];
         let top = object.top-DisplayInitCoords[1];
         let width = object.width;
@@ -208,9 +208,40 @@ function getAllComponents(){
             let fontSize = object.fontSize/fontunitsize;
             components.push({layer:layer,type:"text",fontSize:fontSize,color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,text:text});
         }else if(type=="group"){
-            let ChildObjs = object._objects;
+            let ChildObjs = getAllGroupComponents(object._objects);
             let ChildObjs_text = String(JSON.stringify(ChildObjs));
             components.push({layer:layer,type:"group",left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,child:ChildObjs});
+        }
+      });
+    return components
+}
+
+function getAllGroupComponents(objects){
+    let frameTop,frameLeft;
+    let Display_info ={};
+    let components = new Array;    
+
+    objects.forEach((object, index) => {
+        let type = object.type;
+        let color = object.fill;
+        let left = object.left-DisplayInitCoords[0];
+        let top = object.top-DisplayInitCoords[1];
+        let width = object.width;
+        let scaleX = object.scaleX;
+        let height = object.height;
+        let scaleY = object.scaleY;
+        let radius = object.radius;
+        let layer = object.zIndex;
+
+        if(type=="rect"){
+            components.push({layer:layer,type:"rect",color:color,left:left,top:top,width:width,height:height,scaleX:scaleX,scaleY:scaleY});
+        }else if(type=="circle"){
+            console.log('left:%s\n top:%s',left,top);
+            components.push({layer:layer,type:"circle",color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,radius:radius,scaleX:scaleX,scaleY:scaleY});
+        }else if(type=="text"){
+            let text = object.text;
+            let fontSize = object.fontSize/fontunitsize;
+            components.push({layer:layer,type:"text",fontSize:fontSize,color:color,left:left,width:width*scaleX,height:height*scaleY,top:top,scaleX:scaleX,scaleY:scaleY,text:text});
         }
       });
     return components
@@ -221,7 +252,7 @@ function ConvertDataFormat(objects){
 
     objects.forEach((object, index) => {
         let type = object.type;
-        let color = object.fill;
+        let color = object.color;
         let left = object.left-DisplayInitCoords[0];
         let top = object.top-DisplayInitCoords[1];
         let width = object.width;
@@ -253,7 +284,41 @@ function ConvertDataFormat(objects){
 function generateCode(components){
     let code ="";
     components.forEach((component,index) => {
-        console.log(component)
+        let type = component["type"];
+        let top = component["top"];
+        let left = component["left"];
+        let height = component["height"];
+        let width = component["width"];
+        let scaleX = component["scaleX"];
+        let scaleY = component["scaleY"];
+
+        if(type == "background"){
+            let color = hex2rgb(component["color"]);
+            code += `M5.Lcd.fillScreen(M5.lcd.color565(${color}));\n`;
+        }else if(type == "rect"){
+            let color = hex2rgb(component["color"]);
+            code += `M5.Lcd.fillRect(${left},${top},${width*scaleX},${height*scaleY},M5.lcd.color565(${color}));\n`;
+        }else if(type == "circle"){
+            let color = hex2rgb(component["color"]);
+            code += `M5.Lcd.fillEllipse(${left+width/2},${top+height/2},${width/2},${height/2},M5.lcd.color565(${color}));\n`;
+        }else if(type == "text"){
+            let color = hex2rgb(component["color"]);
+            let text = component["text"];
+            let fontSize = component["fontSize"];
+            code += `M5.Lcd.setTextSize(${fontSize});\n`;
+            code += `M5.Lcd.setCursor(${left},${top+height/4});\n`;
+            code += `M5.Lcd.setTextColor(M5.lcd.color565(${color}));\n`;
+            code += `M5.Lcd.print("${text}");\n`;
+        }else if(type == "group"){
+            code += generateGroupCode(component.child);
+        }
+    });
+    return code;
+}
+
+function generateGroupCode(components){
+    let code ="";
+    components.forEach((component,index) => {
         let type = component["type"];
         let color = hex2rgb(component["color"]);
         let top = component["top"];
@@ -261,10 +326,7 @@ function generateCode(components){
         let height = component["height"];
         let width = component["width"];
         let scaleX = component["scaleX"];
-        let scaleY = component["scaleY"]
-
-        
-        console.log(color)
+        let scaleY = component["scaleY"];
 
         if(type == "background"){
             code += `M5.Lcd.fillScreen(M5.lcd.color565(${color}));\n`;
@@ -280,7 +342,6 @@ function generateCode(components){
             code += `M5.Lcd.setTextColor(M5.lcd.color565(${color}));\n`;
             code += `M5.Lcd.print("${text}");\n`;
         }
-        
     });
     return code;
 }
@@ -354,7 +415,7 @@ function addGroup(GroupObject){
             let top  = component.top;
             let width = component.width;
             let height = component.height;
-            let color = component.fill;
+            let color = component.color;
             let layer = component.layer; 
             let scaleX = component.scaleX;
             let scaleY = component.scaleY;
@@ -365,7 +426,7 @@ function addGroup(GroupObject){
             let top  = component.top; 
             let width = component.width;
             let height = component.height;
-            let color = component.fill;
+            let color = component.color;
             let layer = component.layer;
             let radius = component.radius;
             let scaleX = component.scaleX;
@@ -377,7 +438,7 @@ function addGroup(GroupObject){
             let top  = component.top; 
             let width = component.width;
             let height = component.height;
-            let color = component.fill;
+            let color = component.color;
             let layer = component.layer; 
             let scaleX = component.scaleX;
             let scaleY = component.scaleY;
@@ -395,9 +456,9 @@ function addGroup(GroupObject){
     ObjGroup.top  = TopGroup - ObjGroup.height/2;
     ObjGroup.scaleX = ScaleXGroup;
     ObjGroup.scaleY = ScaleYGroup;
+    ObjGroup.layer = LayerGroup;
     
-    canvas.add(ObjGroup)
-
+    canvas.add(ObjGroup);
     canvas.requestRenderAll();
 }
 

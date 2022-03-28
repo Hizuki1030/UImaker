@@ -1,5 +1,6 @@
 function exportCode(){
     let components = getAllComponents();
+    console.log(components)
     let code = generateCode(components);
     donloadFile("code",code);
 }

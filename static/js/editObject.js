@@ -20,7 +20,8 @@ function Group(){
     if (canvas.getActiveObject().type !== 'activeSelection') { return; }
     
     let group = canvas.getActiveObject().toGroup();
-	group.type = "group";	
+	group.type = "group";
+	group.layer = -1;
     canvas.requestRenderAll();
 
 }
