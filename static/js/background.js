@@ -161,7 +161,6 @@ function fineTuningInit(){
     canvas.on('mouse:up', function(options) {
         canvas.remove(baseXline);
         canvas.remove(baseYline);
-
     });
 }
 
@@ -497,3 +496,48 @@ function addComponentsFromFile(file){
 }
 
 
+
+
+function addComponentsFromJson(json){
+        let components = JSON.parse(json);
+        components.forEach((component, i) => {
+            // 要素に対しての処理
+
+            if(component.type == "rect"){
+                let left = component.left + DisplayInitCoords[0];
+                let top  = component.top + DisplayInitCoords[1];
+                let width = component.width;
+                let height = component.height;
+                let color = component.color;
+                let layer = component.layer; 
+                let scaleX = component.scaleX;
+                let scaleY = component.scaleY;
+                addRect_coord(left,top,width,height,color,layer,scaleX,scaleY);
+            }else if(component.type == "circle"){
+                let left = component.left + DisplayInitCoords[0];
+                let top  = component.top + DisplayInitCoords[1];
+                let width = component.width;
+                let height = component.height;
+                let color = component.color;
+                let layer = component.layer;
+                let radius = component.radius;
+                let scaleX = component.scaleX;
+                let scaleY = component.scaleY;
+                addCircle_coord(left,top,radius,color,layer,scaleX,scaleY);
+            }else if(component.type == "text"){
+                let left = component.left + DisplayInitCoords[0];
+                let top  = component.top + DisplayInitCoords[1];
+                let width = component.width;
+                let height = component.height;
+                let color = component.color;
+                let layer = component.layer; 
+                let scaleX = component.scaleX;
+                let scaleY = component.scaleY;
+                let text = component.text;
+                let fontsize = component.fontSize*fontunitsize;
+                addText_coord(left,top,width,height,color,layer,scaleX,scaleY,text,fontsize);
+            }else if(component.type == "group"){
+                addGroup(component);   
+            }
+        });
+    }

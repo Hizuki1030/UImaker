@@ -1,3 +1,5 @@
+
+
 function exportCode(){
     let components = getAllComponents();
     console.log(components)
@@ -8,6 +10,62 @@ function exportCode(){
 function PrintAllComponents(){
     let components = getAllComponents();
     console.log(components)
+}
+
+let HistoryArray = new Array();
+let HistoryCounter=0;
+let isLatest = true;
+
+
+function recordHistory(){
+    console.log(HistoryArray.length,HistoryCounter)
+    if(HistoryArray.length != HistoryCounter){
+      HistoryArray.splice(HistoryCounter,HistoryArray.length)  
+    }
+    
+    let components = getAllComponents();
+    let json_text = JSON.stringify(components);
+    HistoryArray.push(json_text)
+    console.log(HistoryCounter)
+    HistoryCounter++;
+
+}
+
+function backToHistory(){
+    if(HistoryCounter-1 >= 0){
+        HistoryCounter--;
+    }else{
+        HistoryCounter = 0;
+    }
+    console.log(HistoryCounter)
+    let json = HistoryArray[HistoryCounter];
+    removeAllObject();
+    addComponentsFromJson(json);
+}
+
+function forwardToHistory(){
+
+
+    if(HistoryCounter+1 < HistoryArray.length){
+        HistoryCounter++;
+    }else{
+        HistoryCounter = HistoryArray.length-1;
+    }
+    console.log(HistoryCounter)
+
+    let json = HistoryArray[HistoryCounter];
+    removeAllObject();
+    addComponentsFromJson(json);
+}
+
+function removeAllObject(){
+    let objects = canvas.getObjects();  
+    objects.forEach((object, index) => {
+        let type = object.type;
+        if(type != "frame"){
+            canvas.remove(object)
+        }
+      });
 }
 
 function exportComportnents(){

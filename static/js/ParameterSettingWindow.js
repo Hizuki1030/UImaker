@@ -96,6 +96,7 @@ function parameterXChange(){
     console.log(X)
     activeObjects.set("left",X)
     canvas.requestRenderAll();
+    recordHistory()
 }
 
 //オブジェクトの描画Y軸位置の変更
@@ -106,6 +107,7 @@ function parameterYChange(){
     console.log(Y)
     activeObjects.set("top",Y)
     canvas.requestRenderAll();
+    recordHistory();
 }
 
 //背景色の変更処理
@@ -113,6 +115,7 @@ function changeBackgroundColor(){
     console.log("chanegbackgroundcolor is changed")
     ModuleDisplay.set("fill",document.getElementById('background_color_input').value);
     canvas.requestRenderAll();
+    recordHistory();
 }
 
 
@@ -123,6 +126,7 @@ function parameterFontsizeChange(){
     let fontsize = document.getElementById('parameter_setting_fontsize_input').value*fontunitsize;
     activeObjects.set("fontSize",parseFloat(fontsize))
     canvas.renderAll();
+    recordHistory();
 }
 
 //文字列の変更処理
@@ -131,5 +135,6 @@ function parameterTextChange(){
     let activeObjects = canvas.getActiveObject();
     let text = document.getElementById('parameter_setting_text_input').value;
     activeObjects.set("text",text)
-    canvas.renderAll();    
+    canvas.renderAll(); 
+    recordHistory();   
 }

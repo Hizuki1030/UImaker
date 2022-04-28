@@ -13,6 +13,7 @@ function addRect(){
     });
 
     canvas.add(rect); 
+    recordHistory();
 }
 
 function addCircle(){
@@ -27,6 +28,7 @@ function addCircle(){
          zIndex:1});
 
     canvas.add(Circle);
+    recordHistory();
 }
 
 
@@ -80,6 +82,7 @@ function addText(){
     text.hasControls = false;
     text.text = "hello";
     canvas.add(text);
+    recordHistory();
 }
 
 function addRect_coord(left,top,width,height,color,layer,scaleX,scaleY){

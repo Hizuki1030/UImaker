@@ -13,6 +13,7 @@ function deleteObj(){
     } else {
         alert("オブジェクトが選択されていません。");
     }
+	recordHistory();
 }
 
 function Group(){
@@ -23,7 +24,7 @@ function Group(){
 	group.type = "group";
 	group.layer = -1;
     canvas.requestRenderAll();
-
+	recordHistory();
 }
 
 function Copy() {
@@ -62,4 +63,5 @@ function Paste() {
 		canvas.setActiveObject(clonedObj);
 		canvas.requestRenderAll();
 	});
+	recordHistory();
 }
