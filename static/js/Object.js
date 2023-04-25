@@ -6,12 +6,14 @@ function addRect(){
     width: 40,        //幅
     height: 120,      //高さ
     strokeWidth:0,
+    strokeHeight:0,
     fill:"#0000ff",
-    type:"components_rect",
+    type:"rect",
     zIndex:1
     });
 
     canvas.add(rect); 
+    recordHistory();
 }
 
 function addCircle(){
@@ -21,10 +23,12 @@ function addCircle(){
          left: 100,
          top: 150,
          strokeWidth:0,
-         type:"components_circle",
+        strokeHeight:0,
+         type:"circle",
          zIndex:1});
 
     canvas.add(Circle);
+    recordHistory();
 }
 
 
@@ -66,34 +70,40 @@ function addText(){
         left: 100,
         top: 150,
         strokeWidth: 0,
+        strokeHeight:0,
         fontSize: 14,
         scaleX:1.11,//VT323fontが8pxなのでscaleで調整(画像でみて適当な値)
         scaleY:0.875,// VT323fontが8pxなのでscaleで調整(7/8)
         fill:'#000000',
         fontFamily: 'VT323',
-        type:"components_text",
+        type:"text",
         zIndex:1
     });
     text.hasControls = false;
     text.text = "hello";
     canvas.add(text);
+    recordHistory();
 }
 
 function addRect_coord(left,top,width,height,color,layer,scaleX,scaleY){
     console.log(DisplayInitCoords)
     let rect = new fabric.Rect({
     width:width,
+    strokeWidth:0,
+    strokeHeight:0,
     height:height,
     fill: color, 
     left: left,
-    top: top ,
+    top: top,
     scaleX:scaleX,
     scaleY:scaleY,
-    type:"components_rect",
+    type:"rect",
     zIndex:layer
     });
 
-    canvas.add(rect)  ;
+    canvas.add(rect);
+
+    return rect;
 }
 
 function addCircle_coord(left,top,radius,color,layer,scaleX,scaleY){
@@ -104,11 +114,16 @@ function addCircle_coord(left,top,radius,color,layer,scaleX,scaleY){
          top: top ,
          scaleX:scaleX,
          scaleY:scaleY,
-         type:"components_circle",
+         type:"circle",
+         strokeWidth:0,
+         strokeHeight:0,
          zIndex:layer
+
         });
 
     canvas.add(Circle);
+    
+    return Circle;
 }
 
 
@@ -123,8 +138,72 @@ function addText_coord(left,top,width,height,color,layer,scaleX,scaleY,text,font
         scaleY:scaleY,
         fontSize: fontSize,
         fontFamily: 'VT323',
-        type:"components_text",
+        strokeWidth:0,
+        strokeHeight:0,
+        type:"text",
     });
     Text.hasControls = false;
     canvas.add(Text);
+
+    return Text;
+}
+
+
+
+
+function getRectObj(left,top,width,height,color,layer,scaleX,scaleY){
+    console.log(DisplayInitCoords)
+    let rect = new fabric.Rect({
+    width:width,
+    height:height,
+    fill: color, 
+    left: left,
+    top: top,
+    scaleX:scaleX,
+    scaleY:scaleY,
+    type:"rect",
+    strokeWidth:0,
+    strokeHeight:0,
+    zIndex:layer
+    });
+
+    return rect;
+}
+
+function getCircleObj(left,top,radius,color,layer,scaleX,scaleY){
+    let Circle= new fabric.Circle({ 
+         radius:radius,
+         fill: color, 
+         left: left,
+         top: top ,
+         scaleX:scaleX,
+         scaleY:scaleY,
+         type:"circle",
+         strokeWidth:0,
+         strokeHeight:0,
+         zIndex:layer
+        });
+
+    return Circle;
+}
+
+
+function getTextObj(left,top,width,height,color,layer,scaleX,scaleY,text,fontSize){
+    console.log("fontsize")
+    console.log(fontSize);
+    let Text = new fabric.Text(text, {
+        fill: color, 
+        left: left,
+        top: top ,
+        scaleX:scaleX,
+        scaleY:scaleY,
+        fontSize: fontSize,
+        fontFamily: 'VT323',
+        strokeWidth:0,
+        strokeHeight:0,
+        type:"text",
+    });
+    Text.hasControls = false;
+
+    return Text;
 }

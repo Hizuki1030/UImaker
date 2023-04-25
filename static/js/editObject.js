@@ -13,14 +13,18 @@ function deleteObj(){
     } else {
         alert("オブジェクトが選択されていません。");
     }
+	recordHistory();
 }
 
 function Group(){
     if (! canvas.getActiveObject()) { return; }
     if (canvas.getActiveObject().type !== 'activeSelection') { return; }
     
-    canvas.getActiveObject().toGroup();
+    let group = canvas.getActiveObject().toGroup();
+	group.type = "group";
+	group.layer = -1;
     canvas.requestRenderAll();
+	recordHistory();
 }
 
 function Copy() {
@@ -59,4 +63,5 @@ function Paste() {
 		canvas.setActiveObject(clonedObj);
 		canvas.requestRenderAll();
 	});
+	recordHistory();
 }

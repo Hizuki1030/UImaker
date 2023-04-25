@@ -18,7 +18,7 @@ window.onload = function(){
       showCancelButton: true,
       cancelButtonText : '新規プロジェクト'
     })
-    addComponents(file);
+    addComponentsFromFile(file);
     })();
 
     board = M5stack
@@ -38,6 +38,12 @@ function canvas_init(){
     canvas.setWidth(canvasWidth);
     canvas.renderAll();
     canvas.on('mouse:down' , setWindowParameter)
+    recordHistory()
+
+    canvas.on('object:modified', function(options) {
+      console.log("called")
+      recordHistory();
+  });
 
 
     document.addEventListener("mousewheel", function(e) {
@@ -79,8 +85,11 @@ function handleKeydown(event){
     console.log(keyCode,"is pressed");
     if (keyCode == 67 && isCtrl){ //c
       Copy();
-    }
-    if (keyCode == 86  && isCtrl) { //v
+    }else if (keyCode == 86  && isCtrl) { //v
       Paste();
+    }else if(keyCode == 90  && isCtrl){
+      backToHistory();
+    }else if(keyCode == 89  && isCtrl){
+      forwardToHistory();
     }
 }
